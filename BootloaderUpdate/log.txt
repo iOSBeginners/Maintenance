@@ -1,0 +1,58 @@
+Wed Jan 17 00:39:23 2018
+failed to update the softdevice
+Wed Jan 17 00:44:24 2018
+failed to update the softdevice
+Wed Jan 17 22:10:55 2018
+failed to update the softdevice
+Wed Jan 17 22:12:10 2018
+failed to update the softdevice
+Wed Jan 17 22:17:12 2018
+failed to update the softdevice
+Thu Jan 18 02:02:01 2018
+failed to update the softdevice
+Thu Jan 18 02:02:28 2018
+failed to update the softdevice
+Thu Jan 18 02:03:39 2018
+failed to update the softdevice
+Thu Jan 18 12:41:31 2018
+failed to update the softdevice
+Thu Jan 18 13:17:52 2018
+failed to update the softdevice
+Thu Jan 18 15:50:29 2018
+failed to update the softdevice
+Thu Jan 18 16:14:20 2018
+failed to update the softdevice
+Thu Jan 18 16:17:41 2018
+failed to update the softdevice
+Thu Jan 18 16:24:46 2018
+failed to update the softdevice
+Thu Jan 18 22:09:18 2018
+failed to update the softdevice
+Thu Jan 18 23:09:14 2018
+failed to update the softdevice
+Thu Jan 18 23:29:23 2018
+failed to update the softdevice
+Tue Jan 23 22:46:05 2018
+failed to change the ip address 
+Tue Jan 23 22:49:15 2018
+failed to change the ip address 
+Tue Jan 23 22:52:19 2018
+failed to change the ip address 
+Tue Jan 23 23:11:31 2018
+failed to change the ip address 
+Tue Jan 23 23:14:17 2018
+failed to change the ip address 
+Tue Jan 23 23:15:50 2018
+failed to change the ip address 
+Tue Jan 23 23:18:27 2018
+failed to change the ip address 
+Tue Jan 23 23:19:21 2018
+failed to change the ip address 
+Wed Jan 24 00:09:39 2018
+failed to change the ip address 
+Wed Jan 24 00:19:13 2018
+failed to change the ip address 
+Wed Jan 24 00:22:07 2018
+failed to change the ip address 
+Wed Jan 24 00:23:23 2018
+failed to change the ip address 
