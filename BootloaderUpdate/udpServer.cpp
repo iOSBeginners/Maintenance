@@ -4,7 +4,8 @@
 #include <cmath>
 #include <sstream>
 #include "dfulogger.h"
-#include "vector"
+#include <vector>
+#include <errno.h>
 
 using namespace std;		
 
@@ -38,7 +39,16 @@ const uint8_t REQ_RESET_FIRMWARE[] = { RESET_FIRMWARE, 0x00, 0x00, 0x00 };
 const uint8_t UPDATE_IP_START_PACKET[] = {UPDATE_IP, 0x00, 0x00, 0x00};
 const uint8_t UPDATE_IP_FEEDBACK[] = { UPDATE_IP, 0x00, 0x00, 0x00 };
 
-
+bool str2int (int &i, char const *s)
+{
+    std::stringstream ss(s);
+    ss >> i;
+    if (ss.fail()) {
+        // not an integer
+        return false;
+    }
+    return true;
+}
 
 UdpServer::UdpServer(int port, const string& host_ip)
 {
@@ -255,17 +265,17 @@ bool UdpServer::updateIp(string const& ip)
 	vector<uint8_t> ipArray;
 	for (int i = 0; i < ipArrayStr.size(); i++)
 	{
-		try
+		
+		string str  = ipArrayStr[i] ;
+		int val = 0;
+		if (str2int (val, str.c_str()))
 		{
-			string str  = ipArrayStr[i] ;
-			int val = stoi(str);
 			ipArray.push_back((uint8_t)val);
 		}
-		catch (exception const& e)
+		else
 		{
 			return false;
 		}
-		
 	}
 	// send ip packet 
 	

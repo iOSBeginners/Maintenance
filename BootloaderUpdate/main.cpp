@@ -6,6 +6,9 @@
 #include "dfulogger.h"
 #include <iostream>
 #include <Windows.h>
+#if _MSC_VER < 1600 //MSVC version <8
+	#include "nullptr_emulation.h"
+#endif
 using namespace std;
 
 enum RetErrors
@@ -16,7 +19,7 @@ enum RetErrors
 };
 const string NO_DEVICE_IP = "0.0.0.0";
 const string BRIDGE_IP = "192.168.4.2";
-const string ANTENNA_IP = "192.168.0.10";
+const string ANTENNA_IP = "192.168.4.3";
 const string BEACON_IP = "192.168.4.4";
 const int PORT = 1234;
 
@@ -47,12 +50,13 @@ struct Device
 	string ip;
 };
 
+DeviceType UpdatedDeviceType = BEACON;
 int main(int argc,char* argv[])
 {
 	HWND hWnd = GetConsoleWindow();
 	ShowWindow(hWnd, SW_HIDE);
 	// define the device instance with the ip we want to update
-	Device updatedDevice(ANTENNA);
+	Device updatedDevice(UpdatedDeviceType);
 	Device currentDevice(NO_DEVICE);
 
 	// define all devices
