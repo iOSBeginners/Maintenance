@@ -9,7 +9,7 @@
 
 using namespace std;
 
-#if 0
+#if 1
 uint16_t crc16_compute(uint8_t const * p_data, uint32_t size, uint16_t const * p_crc)
 {
 	uint16_t crc = (p_crc == NULL) ? 0xFFFF : *p_crc;
@@ -40,7 +40,7 @@ SdUpdatePacket::SdUpdatePacket(string& sd_filename, string& bl_filename, SdkVers
 	m_data = new char[512000];
 	// read sd binary file
 	
-	/*ifstream sdfile(sd_filename, ios::in | ios::binary | ios::ate);
+	ifstream sdfile(sd_filename, ios::in | ios::binary | ios::ate);
 	if (sdfile.is_open())
 	{
 		streampos sdsize;
@@ -53,11 +53,11 @@ SdUpdatePacket::SdUpdatePacket(string& sd_filename, string& bl_filename, SdkVers
 	else
 	{
 		Logger::log("failed to read softdevice binary file");
-	}*/
+	}
 
 	// read bl binary file
 	
-	ifstream blfile(bl_filename, ios::in | ios::binary | ios::ate);
+	/*ifstream blfile(bl_filename, ios::in | ios::binary | ios::ate);
 	if (blfile.is_open())
 	{
 		streampos blsize;
@@ -71,8 +71,8 @@ SdUpdatePacket::SdUpdatePacket(string& sd_filename, string& bl_filename, SdkVers
 	else
 	{
 		Logger::log("failed to read bootloader binary file");
-	}
-	m_sdSize = 0;
+	}*/
+	m_blSize = 0;
 	m_totalSize = m_sdSize + m_blSize;
 }
 
@@ -85,7 +85,7 @@ SdUpdatePacket::~SdUpdatePacket()
 Packet& SdUpdatePacket::buildStartPacket()
 {
 	uint32_t type_packet = 3;
-	uint32_t type_image = 2; // soft device
+	uint32_t type_image = 1; // soft device
 	uint32_t length_sd_image = m_sdSize;
 	uint32_t length_bootloader_image = m_blSize;
 	uint32_t length_app_image = 0;

@@ -56,3 +56,11 @@ Wed Jan 24 00:22:07 2018
 failed to change the ip address 
 Wed Jan 24 00:23:23 2018
 failed to change the ip address 
+Tue Jan 30 08:40:01 2018
+failed to read softdevice binary file
+Tue Jan 30 08:40:52 2018
+failed to read softdevice binary file
+Tue Jan 30 08:41:35 2018
+failed to read softdevice binary file
+Tue Jan 30 08:41:42 2018
+failed to read softdevice binary file

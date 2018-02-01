@@ -17,10 +17,18 @@ enum RetErrors
 	DFU_ERROR,
 	CONF_ERROR
 };
+//#define _LOCAL
+#ifdef _LOCAL
 const string NO_DEVICE_IP = "0.0.0.0";
-const string BRIDGE_IP = "192.168.4.2";
+const string BRIDGE_IP = "192.168.0.10";
 const string ANTENNA_IP = "192.168.4.3";
 const string BEACON_IP = "192.168.4.4";
+#else
+const string NO_DEVICE_IP = "0.0.0.0";
+const string BRIDGE_IP = "192.168.94.2";
+const string ANTENNA_IP = "192.168.94.3";
+const string BEACON_IP = "192.168.94.4";
+#endif
 const int PORT = 1234;
 
 
@@ -51,6 +59,7 @@ struct Device
 };
 
 DeviceType UpdatedDeviceType = BEACON;
+#if 1
 int main(int argc,char* argv[])
 {
 	HWND hWnd = GetConsoleWindow();
@@ -125,3 +134,18 @@ int main(int argc,char* argv[])
 	}
 	return 0;
 }
+#endif
+#if 0
+int main(int argc, char argv[])
+{
+	UdpServer udpChangeIp(PORT, BRIDGE_IP);
+	bool ret = udpChangeIp.initialize();
+	if (!ret)
+	{
+		Logger::log("failed to initialize udp server");
+		MessageBox(nullptr, TEXT("Echec de la mise à jour"), TEXT("Message"), MB_OK);
+		return RetErrors::DFU_ERROR;
+	}
+	udpChangeIp.UdpServer::updateSoftDevice(string("sdk12.bin"), string("bl"), SdkVersion::SDK11);
+}
+#endif

@@ -35,8 +35,8 @@ public:
 	bool initialize();
 	void sendPacketAndWaitFeedback(const uint8_t* buffer, uint32_t bufferSize);
 	bool sendPacket(const uint8_t* buffer, uint32_t bufferSize);
-	//void transferFirmware(string& sd_filename,string& bl_filename, SdkVersion sdkversion);
-	//bool updateSoftDevice(string& sd_filename, string& bl_filename, SdkVersion sdkversion);
+	void transferFirmware(string& sd_filename,string& bl_filename, SdkVersion sdkversion);
+	bool updateSoftDevice(string& sd_filename, string& bl_filename, SdkVersion sdkversion);
 	bool check_bootloader_ip();
 	void closeSocket();
 	void requestFirmwareReset();

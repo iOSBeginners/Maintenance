@@ -141,7 +141,7 @@ bool UdpServer::check_bootloader_ip()
 	return false;
 
 }
-#if 0
+#if 1
 void UdpServer::transferFirmware(string& sd_filename, string& bl_filename, SdkVersion sdkversion)
 {
 	bool ret;

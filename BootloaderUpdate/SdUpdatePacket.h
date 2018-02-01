@@ -32,7 +32,7 @@ struct Packet
 	uint8_t data[MAX_LENGTH_PACKET];
 	uint16_t length;
 };
-#if 0
+#if 1
 class SdUpdatePacket
 {
 public:
