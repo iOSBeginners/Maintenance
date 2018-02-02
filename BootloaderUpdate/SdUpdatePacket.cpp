@@ -40,7 +40,7 @@ SdUpdatePacket::SdUpdatePacket(string& sd_filename, string& bl_filename, SdkVers
 	m_data = new char[512000];
 	// read sd binary file
 	
-	ifstream sdfile(sd_filename, ios::in | ios::binary | ios::ate);
+	ifstream sdfile(sd_filename.c_str(), ios::in | ios::binary | ios::ate);
 	if (sdfile.is_open())
 	{
 		streampos sdsize;

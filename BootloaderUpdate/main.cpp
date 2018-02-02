@@ -20,9 +20,9 @@ enum RetErrors
 //#define _LOCAL
 #ifdef _LOCAL
 const string NO_DEVICE_IP = "0.0.0.0";
-const string BRIDGE_IP = "192.168.0.10";
-const string ANTENNA_IP = "192.168.4.3";
-const string BEACON_IP = "192.168.4.4";
+const string BRIDGE_IP = "192.168.1.45";
+const string ANTENNA_IP = "192.168.1.46";
+const string BEACON_IP = "192.168.1.47";
 #else
 const string NO_DEVICE_IP = "0.0.0.0";
 const string BRIDGE_IP = "192.168.94.2";
@@ -78,9 +78,8 @@ int main(int argc,char* argv[])
 	bool ret = false;
 	for (int i = 0,j=0; i < devices.size(); j++)
 	{
-		if (j % 2)
-			i++;
-		Sleep(500);
+		
+		Sleep(100);
  		Device device = devices[i];
 		UdpServer udpCheckIp(PORT, device.ip);
 		udpCheckIp.initialize();
@@ -90,6 +89,8 @@ int main(int argc,char* argv[])
 			currentDevice = device;
 			break;
 		}
+		if (j % 2)
+			i++;
 	}
 	if (!ret)
 	{
@@ -101,25 +102,29 @@ int main(int argc,char* argv[])
 	// change the ip address of the bootloader if the current device type of the current device is not the same as the device type of the device to update
 	if (currentDevice.deviceType == updatedDevice.deviceType)
 	{
-		UdpServer udpChangeIp(PORT, currentDevice.ip);
-		ret = udpChangeIp.initialize();
-		if (!ret)
-		{
-			Logger::log("failed to initialize udp server");
-			MessageBox(nullptr, TEXT("Echec de la mise à jour"), TEXT("Message"), MB_OK);
-			return RetErrors::DFU_ERROR;
-		}
-		ret  = udpChangeIp.updateIp(updatedDevice.ip);
-		if (!ret)
-		{
-			Logger::log("failed to change the ip address ");
-			MessageBox(nullptr, TEXT("Echec de la mise à jour"), TEXT("Message"), MB_OK);
-			return RetErrors::DFU_ERROR;
-		}
-		Sleep(2000);
-		udpChangeIp.requestFirmwareReset();
-		udpChangeIp.closeSocket();
+		MessageBox(nullptr, TEXT("Aucune mise à jour n'est requise. Opération réussite"), TEXT("Message"), MB_OK);
+		return 0;
 	}
+	
+	UdpServer udpChangeIp(PORT, currentDevice.ip);
+	ret = udpChangeIp.initialize();
+	if (!ret)
+	{
+		Logger::log("failed to initialize udp server");
+		MessageBox(nullptr, TEXT("Echec de la mise à jour"), TEXT("Message"), MB_OK);
+		return RetErrors::DFU_ERROR;
+	}
+	ret  = udpChangeIp.updateIp(updatedDevice.ip);
+	if (!ret)
+	{
+		Logger::log("failed to change the ip address ");
+		MessageBox(nullptr, TEXT("Echec de la mise à jour"), TEXT("Message"), MB_OK);
+		return RetErrors::DFU_ERROR;
+	}
+	Sleep(100);
+	udpChangeIp.requestFirmwareReset();
+	udpChangeIp.closeSocket();
+
 	switch (updatedDevice.deviceType)
 	{
 		case BRIDGE:

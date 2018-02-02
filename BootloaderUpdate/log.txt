@@ -64,3 +64,5 @@ Tue Jan 30 08:41:35 2018
 failed to read softdevice binary file
 Tue Jan 30 08:41:42 2018
 failed to read softdevice binary file
+Fri Feb 02 01:21:14 2018
+ no device is detected through ethernet 
