@@ -23,12 +23,16 @@ const string NO_DEVICE_IP = "0.0.0.0";
 const string BRIDGE_IP = "192.168.1.45";
 const string ANTENNA_IP = "192.168.1.46";
 const string BEACON_IP = "192.168.1.47";
+
 #else
 const string NO_DEVICE_IP = "0.0.0.0";
 const string BRIDGE_IP = "192.168.94.2";
 const string ANTENNA_IP = "192.168.94.3";
 const string BEACON_IP = "192.168.94.4";
 #endif
+const uint8_t BRIDGE_MAC[] = { 0x00, 0x08, 0xdc, 0x00, 0xab, 0xab };
+const uint8_t ANTENNA_MAC[] = { 0x00, 0x08, 0xdc, 0x00, 0xab, 0xbc };
+const uint8_t BEACON_MAC[] = { 0x00, 0x08, 0xdc, 0x00, 0xab, 0xcd };
 const int PORT = 1234;
 
 
@@ -42,12 +46,15 @@ struct Device
 		{
 			case BRIDGE:
 				ip = BRIDGE_IP;
+				memcpy(mac, BRIDGE_MAC, 6);
 				break;
 			case ANTENNA:
 				ip = ANTENNA_IP;
+				memcpy(mac, ANTENNA_MAC, 6);
 				break;
 			case BEACON:
 				ip = BEACON_IP;
+				memcpy(mac, BEACON_MAC, 6);
 				break;
 			default:
 				ip = NO_DEVICE_IP;
@@ -56,10 +63,11 @@ struct Device
 	}
 	DeviceType deviceType;
 	string ip;
+	uint8_t mac[6];
 };
 
 DeviceType UpdatedDeviceType = BEACON;
-#if 1
+
 int main(int argc,char* argv[])
 {
 	HWND hWnd = GetConsoleWindow();
@@ -114,7 +122,7 @@ int main(int argc,char* argv[])
 		MessageBox(nullptr, TEXT("Echec de la mise à jour"), TEXT("Message"), MB_OK);
 		return RetErrors::DFU_ERROR;
 	}
-	ret  = udpChangeIp.updateIp(updatedDevice.ip);
+	ret  = udpChangeIp.updateIp(updatedDevice.ip,updatedDevice.mac);
 	if (!ret)
 	{
 		Logger::log("failed to change the ip address ");
@@ -139,18 +147,3 @@ int main(int argc,char* argv[])
 	}
 	return 0;
 }
-#endif
-#if 0
-int main(int argc, char argv[])
-{
-	UdpServer udpChangeIp(PORT, BRIDGE_IP);
-	bool ret = udpChangeIp.initialize();
-	if (!ret)
-	{
-		Logger::log("failed to initialize udp server");
-		MessageBox(nullptr, TEXT("Echec de la mise à jour"), TEXT("Message"), MB_OK);
-		return RetErrors::DFU_ERROR;
-	}
-	udpChangeIp.UdpServer::updateSoftDevice(string("sdk12.bin"), string("bl"), SdkVersion::SDK11);
-}
-#endif

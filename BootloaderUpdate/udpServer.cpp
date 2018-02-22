@@ -256,7 +256,7 @@ std::vector<std::string> split(const std::string& s, char delimiter)
 	return tokens;
 }
 
-bool UdpServer::updateIp(string const& ip)
+bool UdpServer::updateIp(string const& ip,uint8_t* mac)
 {
 	// convert the ip string to an array of 4 bytes
 	vector<string> ipArrayStr = split(ip,'.');
@@ -279,12 +279,11 @@ bool UdpServer::updateIp(string const& ip)
 	}
 	// send ip packet 
 	
-	uint8_t updateIpPacket[8];
+	uint8_t updateIpPacket[14];
 	memcpy(updateIpPacket, UPDATE_IP_START_PACKET, 4);
 	memcpy(updateIpPacket + 4, &ipArray[0], 4);
-	sendPacketAndWaitFeedback(updateIpPacket, 8);
-	for (int i = 0; i<8; i++)
-		cout << (int)updateIpPacket[i] << endl;
+	memcpy(updateIpPacket + 8, mac, 6);
+	sendPacketAndWaitFeedback(updateIpPacket, 14);
 	if (m_rcvPacket.length > 0 && !memcmp(m_rcvPacket.data, UPDATE_IP_FEEDBACK, 4)){
 		Logger::console("the ip is updated");
 		Sleep(100);

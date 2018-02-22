@@ -40,7 +40,7 @@ public:
 	bool check_bootloader_ip();
 	void closeSocket();
 	void requestFirmwareReset();
-	bool updateIp(string const& ip);
+	bool updateIp(string const& ip, uint8_t* mac);
 private:
 	int m_port;    // port used for the udp communication
 	std::string m_host_ip; // ip address of the tdfu target
