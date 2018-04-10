@@ -26,9 +26,9 @@ const string BEACON_IP = "192.168.1.47";
 
 #else
 const string NO_DEVICE_IP = "0.0.0.0";
-const string BRIDGE_IP = "192.168.94.2";
-const string ANTENNA_IP = "192.168.94.3";
-const string BEACON_IP = "192.168.94.4";
+const string BRIDGE_IP = "192.168.4.2";
+const string ANTENNA_IP = "192.168.4.3";
+const string BEACON_IP = "192.168.4.4";
 #endif
 const uint8_t BRIDGE_MAC[] = { 0x00, 0x08, 0xdc, 0x00, 0xab, 0xab };
 const uint8_t ANTENNA_MAC[] = { 0x00, 0x08, 0xdc, 0x00, 0xab, 0xbc };
